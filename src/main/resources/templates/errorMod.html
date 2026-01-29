@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Mod no encontrada</title>
+    <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}">
+</head>
+<body>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="alert alert-danger" role="alert">
+                <h4 class="alert-heading">Error!</h4>
+                <p>La mod que estás buscando no existe.</p>
+                <hr>
+                <a th:href="@{/mods}" class="btn btn-primary">Volver a la lista de mods</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

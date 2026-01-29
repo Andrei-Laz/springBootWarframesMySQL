@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${titulo}">Formulario Mod</title>
+    <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}">
+</head>
+<body>
+<div class="container mt-5">
+    <h1 th:text="${titulo}">Formulario</h1>
+    <form th:action="@{/mods/guardar}" th:object="${mod}" method="post">
+        <!-- Campo oculto para el ID. Si es null se creará nuevo, si tiene valor se editará -->
+        <input type="hidden" th:field="*{modId}" />
+        <div class="row">
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label class="form-label">Nombre:</label>
+                    <input type="text" class="form-control" th:field="*{name}" required />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Rareza:</label>
+                    <input type="text" class="form-control" th:field="*{rarity}" required />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Costo:</label>
+                    <input type="number" class="form-control" th:field="*{cost}" required />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label class="form-label">Polaridad:</label>
+                    <input type="text" class="form-control" th:field="*{polarity}" required />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Descripción:</label>
+                    <textarea class="form-control" th:field="*{description}" rows="3"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="mt-3">
+            <button type="submit" class="btn btn-success">Guardar</button>
+            <a th:href="@{/mods}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</div>
+</body>
+</html>
