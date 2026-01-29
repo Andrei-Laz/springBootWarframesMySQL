@@ -11,3 +11,10 @@ services:
       MYSQL_DATABASE: SpringBootWarframe
       MYSQL_USER: Andrei
       MYSQL_PASSWORD: wasd
+
+
+#export database
+#docker exec -i mysql-warframe-server mysqldump --no-tablespaces -u root -p SpringBootWarframe > SpringBootWarframe.sql
+
+#import database
+#docker exec -i mysql-warframe-server mysql -u root -p SpringBootWarframe < SpringBootWarframe.sql
