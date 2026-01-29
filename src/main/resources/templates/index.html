@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Warframes - Inicio</title>
+    <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}">
+    <style>
+        body {
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+        .card {
+            background-color: #1e1e1e;
+            border: 1px solid #333;
+            color: #e0e0e0;
+        }
+        .btn-primary {
+            background-color: #0d6efd;
+            border-color: #0d6efd;
+        }
+        .btn-primary:hover {
+            background-color: #0b5ed7;
+            border-color: #0a58ca;
+        }
+        .btn-success {
+            background-color: #198754;
+            border-color: #198754;
+        }
+        .btn-success:hover {
+            background-color: #157347;
+            border-color: #146c43;
+        }
+        .btn-info {
+            background-color: #0dcaf0;
+            border-color: #0dcaf0;
+            color: #000;
+        }
+        .btn-info:hover {
+            background-color: #31d2f2;
+            border-color: #25cff2;
+        }
+        .warframe-list-link {
+            text-decoration: none;
+            color: inherit;
+        }
+        .warframe-list-link:hover {
+            text-decoration: underline;
+            color: #0d6efd;
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card text-center p-5">
+                <h1 class="display-4 mb-4 text-primary">Warframes Database</h1>
+                <p class="lead mb-4">Bienvenido al sistema de gestión de Warframes.</p>
+
+                <div class="d-grid gap-3 col-8 mx-auto mb-4">
+                    <a th:href="@{/warframes}" class="btn btn-primary btn-lg warframe-list-link">
+                        Ver Warframes
+                    </a>
+                    <a th:href="@{/importar}" class="btn btn-info btn-lg">
+                        Importar Datos desde CSV
+                    </a>
+                </div>
+
+                <hr class="my-4">
+
+                <div class="alert alert-info" role="alert">
+                    <strong>Nota:</strong> Asegúrate de que no haya datos existentes en la base de datos antes de importar.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

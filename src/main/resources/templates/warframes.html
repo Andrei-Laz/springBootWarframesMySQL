@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Warframes</title>
+    <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}">
+</head>
+<body>
+<div class="container mt-5">
+    <h1>Warframes</h1>
+    <h5 th:if="${warframes.size() > 0}">Aquí tienes una tabla con todos los warframes y las acciones que puedes hacer con ellos</h5>
+    <p th:unless="${warframes.size() > 0}">No hay warframes registrados en el sistema</p>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Salud</th>
+            <th>Armadura</th>
+            <th>Energía</th>
+            <th>Velocidad</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="warframe : ${warframes}">
+            <td th:text="${warframe.warframeId}">1</td>
+            <td th:text="${warframe.name}">Volt</td>
+            <td th:text="${warframe.health}">300</td>
+            <td th:text="${warframe.armor}">150</td>
+            <td th:text="${warframe.energy}">150</td>
+            <td th:text="${warframe.sprintSpeed}">1.0</td>
+            <td>
+                <!-- Mostrar enlace a la página de detalles del warframe -->
+                <a th:href="@{/warframe/{id}(id=${warframe.warframeId})}" class="btn btn-primary btn-sm">Detalles</a>
+
+                <a th:href="@{/warframes/editar/{id}(id=${warframe.warframeId})}" class="btn btn-warning btn-sm">Editar</a>
+
+                <!-- En un entorno real, borrar debería ser un form con method POST/DELETE,
+                     pero para aprender, un GET está bien -->
+                <a th:href="@{/warframes/borrar/{id}(id=${warframe.warframeId})}"
+                   class="btn btn-danger btn-sm"
+                   onclick="return confirm('¿Estás seguro de borrar este warframe?')">Borrar</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="mt-3">
+        <a th:href="@{/warframes/nuevo}" class="btn btn-success">Agregar Nuevo Warframe</a>
+        <a th:href="@{/}" class="btn btn-secondary ms-2">Volver al Inicio</a>
+    </div>
+</div>
+</body>
+</html>

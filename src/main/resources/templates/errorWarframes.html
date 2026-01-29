@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Warframe no encontrado</title>
+    <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}">
+</head>
+<body>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="alert alert-danger" role="alert">
+                <h4 class="alert-heading">Error!</h4>
+                <p>El warframe que estás buscando no existe.</p>
+                <hr>
+                <a th:href="@{/warframes}" class="btn btn-primary">Volver a la lista de warframes</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
