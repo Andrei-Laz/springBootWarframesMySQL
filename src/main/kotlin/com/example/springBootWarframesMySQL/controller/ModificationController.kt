@@ -17,8 +17,8 @@ class ModificationController(private val modificationService: ModificationServic
 
     @GetMapping("/mod/{id}")
     fun detalle(@PathVariable id: Int, model: Model): String {
-        val mod = modificationService.getById(id) ?: return "errorMod"
-        model.addAttribute("modification", mod)
+        val modification = modificationService.getById(id) ?: return "errorMod"
+        model.addAttribute("modification", modification)
         return "detalleMod"
     }
 

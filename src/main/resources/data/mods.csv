@@ -1,16 +1,16 @@
 id;name;rarity;cost;polarity;description
-1;Vitality;Common;4;V;+55% Health
-2;Steel Fiber;Common;4;V;+75% Armor
-3;Frost;Common;6;D;Ice Status Effect Chance +15%
-4;Molten Impact;Common;4;U;Heat Status Effect Chance +15%
-5;Shocking Touch;Common;4;U;Electric Status Effect Chance +15%
-6;Toxic Blast;Common;4;D;Toxin Status Effect Chance +15%
-7;Pressure Point;Common;6;V;Melee Damage +90%
-8;Serration;Common;6;V;Rifle Damage +90%
-9;Split Chamber;Common;6;V;Shotgun Damage +90%
-10;Bladed Rounds;Common;6;V;Pistol Damage +90%
-11;Fast Deflection;Common;4;V;Health Recovery on Shield Recharge
-12;Redirection;Common;4;V;Convert Damage to Shields
-13;Rebound;Common;4;V;Damage to Shields Adds to Health
-14;Quickdraw;Common;4;V;Reload Speed +86%
-15;Enhanced Durability;Common;4;V;Max Health +40
+1;Vitality;Common;4;V;+440% Warframe Health
+2;Steel Fiber;Common;4;V;+110% Warframe Armor
+3;Cryo Rounds;Common;6;D;+90% Cold Damage to Rifles
+4;Molten Impact;Common;4;U;+90% Heat Damage to Melee Weapons
+5;Shocking Touch;Common;4;U;+90% Electricity Damage to Melee Weapons
+6;Toxic Blast;Common;4;D;+60% Toxin Damage and +60% Status Chance for Shotguns
+7;Pressure Point;Common;6;V;+120% Melee Damage
+8;Serration;Common;6;V;+165% Rifle Damage
+9;Point Blank;Common;6;V;+165% Shotgun Damage
+10;Hornet Strike;Common;6;V;+220% Pistol Damage
+11;Fast Deflection;Common;4;V;+150% Shield Recharge Rate
+12;Redirection;Common;4;V;+440% Shield Capacity
+13;Rebound;Common;4;V;+100% Glaive Ricochet Bounces
+14;Quickdraw;Common;4;V;+72% Pistol Reload Speed
+15;Enhanced Durability;Common;4;V;+150% Archwing Health
