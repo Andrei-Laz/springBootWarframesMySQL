@@ -9,7 +9,10 @@ import jakarta.persistence.Table
 
 @Entity
 @Table(name = "mods")
-data class Mod(
+/*Necessary refactor of every single instance of the mod wording for a Mod class reference due to
+the already existing operator in SpringBoot called mod
+ */
+data class Modification(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var modId: Int? = null,

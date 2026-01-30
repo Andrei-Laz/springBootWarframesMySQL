@@ -28,5 +28,5 @@ class Build(
     @ManyToOne
     @MapsId("idMod")
     @JoinColumn(name = "mod_id")
-    var mod: Mod? = null,
+    var modification: Modification? = null,
 )

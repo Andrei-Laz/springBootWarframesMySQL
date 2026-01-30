@@ -11,41 +11,41 @@
         <div class="col-md-8 text-center">
             <div class="card text-center">
                 <div class="card-body">
-                    <h1 class="card-title text-primary mb-4" th:text="${mod.name}">Nombre</h1>
+                    <h1 class="card-title text-primary mb-4" th:text="${modification.name}">Nombre</h1>
 
                     <!-- Datos de la Mod -->
                     <div class="row">
                         <div class="col-md-6">
                             <p class="fs-5">
                                 <span class="fw-bold">ID:</span>
-                                <span th:text="${mod.modId}">1</span>
+                                <span th:text="${modification.modId}">1</span>
                             </p>
                             <p class="fs-5">
                                 <span class="fw-bold">Rareza:</span>
-                                <span th:text="${mod.rarity}">Common</span>
+                                <span th:text="${modification.rarity}">Common</span>
                             </p>
                             <p class="fs-5">
                                 <span class="fw-bold">Costo:</span>
-                                <span th:text="${mod.cost}">4</span>
+                                <span th:text="${modification.cost}">4</span>
                             </p>
                         </div>
                         <div class="col-md-6">
                             <p class="fs-5">
                                 <span class="fw-bold">Polaridad:</span>
-                                <span th:text="${mod.polarity}">V</span>
+                                <span th:text="${modification.polarity}">V</span>
                             </p>
                             <p class="fs-5">
                                 <span class="fw-bold">Descripción:</span>
-                                <span th:text="${mod.description}">Sin descripción</span>
+                                <span th:text="${modification.description}">Sin descripción</span>
                             </p>
                         </div>
                     </div>
 
                     <hr class="my-4">
                     <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                        <a th:href="@{/mods/editar/{id}(id=${mod.modId})}"
+                        <a th:href="@{/mods/editar/{id}(id=${modification.modId})}"
                            class="btn btn-warning me-md-2">Editar</a>
-                        <a th:href="@{/mods/borrar/{id}(id=${mod.modId})}"
+                        <a th:href="@{/mods/borrar/{id}(id=${modification.modId})}"
                            class="btn btn-danger me-md-2"
                            onclick="return confirm('¿Estás seguro de borrar esta mod?')">Borrar</a>
                     </div>

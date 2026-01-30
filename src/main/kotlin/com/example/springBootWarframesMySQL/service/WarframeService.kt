@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service
 import java.io.File
 
 @Service
-class WarframeService(private val repository: WarframeRepository) {
+class   WarframeService(private val repository: WarframeRepository) {
     fun getWarframes(): List<Warframe> = repository.findAll()
 
     fun getById(id: Int): Warframe? = repository.findById(id).orElse(null)

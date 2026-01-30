@@ -7,7 +7,7 @@
 <body>
 <div class="container mt-5">
     <h1 th:text="${titulo}">Formulario</h1>
-    <form th:action="@{/mods/guardar}" th:object="${mod}" method="post">
+    <form th:action="@{/mods/guardar}" th:object="${modification}" method="post">
         <!-- Campo oculto para el ID. Si es null se creará nuevo, si tiene valor se editará -->
         <input type="hidden" th:field="*{modId}" />
         <div class="row">

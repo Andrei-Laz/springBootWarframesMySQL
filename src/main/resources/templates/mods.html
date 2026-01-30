@@ -22,16 +22,16 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="mod : ${mods}">
-            <td th:text="${mod.modId}">1</td>
-            <td th:text="${mod.name}">Vitality</td>
-            <td th:text="${mod.rarity}">Common</td>
-            <td th:text="${mod.cost}">4</td>
-            <td th:text="${mod.polarity}">V</td>
+        <tr th:each="modification : ${mods}">
+            <td th:text="${modification.modId}">1</td>
+            <td th:text="${modification.name}">Vitality</td>
+            <td th:text="${modification.rarity}">Common</td>
+            <td th:text="${modification.cost}">4</td>
+            <td th:text="${modification.polarity}">V</td>
             <td>
-                <a th:href="@{/mod/{id}(id=${mod.modId})}" class="btn btn-primary btn-sm">Detalles</a>
-                <a th:href="@{/mods/editar/{id}(id=${mod.modId})}" class="btn btn-warning btn-sm">Editar</a>
-                <a th:href="@{/mods/borrar/{id}(id=${mod.modId})}"
+                <a th:href="@{/modification/{id}(id=${modification.modId})}" class="btn btn-primary btn-sm">Detalles</a>
+                <a th:href="@{/mods/editar/{id}(id=${modification.modId})}" class="btn btn-warning btn-sm">Editar</a>
+                <a th:href="@{/mods/borrar/{id}(id=${modification.modId})}"
                    class="btn btn-danger btn-sm"
                    onclick="return confirm('¿Estás seguro de borrar esta mod?')">Borrar</a>
             </td>

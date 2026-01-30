@@ -1,17 +1,17 @@
 package com.example.springBootWarframesMySQL.service
 
-import com.example.springBootWarframesMySQL.model.Mod
-import com.example.springBootWarframesMySQL.repository.ModRepository
+import com.example.springBootWarframesMySQL.model.Modification
+import com.example.springBootWarframesMySQL.repository.ModificationRepository
 import org.springframework.stereotype.Service
 import java.io.File
 
 @Service
-class ModService(private val repository: ModRepository) {
-    fun getMods(): List<Mod> = repository.findAll()
+class ModificationService(private val repository: ModificationRepository) {
+    fun getMods(): List<Modification> = repository.findAll()
 
-    fun getById(id: Int): Mod? = repository.findById(id).orElse(null)
+    fun getById(id: Int): Modification? = repository.findById(id).orElse(null)
 
-    fun post(mod: Mod): Mod = repository.save(mod)
+    fun post(modification: Modification): Modification = repository.save(modification)
 
     fun delete(id: Int) {
         if (repository.existsById(id)) {
@@ -27,9 +27,9 @@ class ModService(private val repository: ModRepository) {
 
             if (file.exists()) {
                 println("El archivo de mods existe, importando datos...")
-                val modBuffer = file.readLines().drop(1).map { line -> // drop(1) para omitir la cabecera
+                val modificationBuffer = file.readLines().drop(1).map { line -> // drop(1) para omitir la cabecera
                     val parts = line.split(";")
-                    Mod(
+                    Modification(
                         modId = null,
                         name = parts[1],
                         rarity = parts[2],
@@ -38,7 +38,7 @@ class ModService(private val repository: ModRepository) {
                         description = parts[5]
                     )
                 }
-                repository.saveAll(modBuffer)
+                repository.saveAll(modificationBuffer)
                 println("Datos de mods importados exitosamente.")
             } else {
                 println("El archivo CSV de mods no existe: $filePath")
