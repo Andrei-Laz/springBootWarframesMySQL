@@ -45,4 +45,30 @@ class BuildService(
 
         buildRepository.save(nuevaBuild)
     }
+
+    fun actualizarBuild(
+        buildId: Int,
+        name: String,
+        warframeId: Int,
+        modIds: List<Int>
+    ) {
+        val build = buildRepository.findById(buildId).orElseThrow()
+        val warframe = warframeRepository.findById(warframeId).orElseThrow()
+        val mods = modificationRepository.findAllById(modIds).toMutableSet()
+
+        build.name = name
+        build.warframe = warframe
+        build.mods.clear()
+        build.mods.addAll(mods)
+
+        buildRepository.save(build)
+    }
+
+
+    fun borrarBuild(id: Int) {
+        if (!buildRepository.existsById(id)) {
+            throw RuntimeException("Build no encontrada")
+        }
+        buildRepository.deleteById(id)
+    }
 }

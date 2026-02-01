@@ -9,7 +9,10 @@
 <div class="container mt-5">
     <h1>Nueva Build</h1>
 
-    <form th:action="@{/builds/guardar}" method="post">
+    <!-- FORMULARIO CREAR -->
+    <form th:if="${!edit}"
+          th:action="@{/builds/guardar}"
+          method="post">
 
         <!-- NOMBRE -->
         <div class="mb-3">
@@ -52,11 +55,68 @@
             <button type="submit" class="btn btn-success">
                 Guardar Build
             </button>
-            <a th:href="@{/builds}" class="btn btn-secondary">
-                Cancelar
-            </a>
+            <a th:href="@{/builds}" class="btn btn-secondary">Cancelar</a>
         </div>
     </form>
+
+
+    <!-- FORMULARIO EDITAR -->
+    <form th:if="${edit}"
+          th:action="@{/builds/actualizar}"
+          method="post">
+
+        <input type="hidden"
+               name="buildId"
+               th:value="${build.buildId}" />
+
+        <!-- NOMBRE -->
+        <div class="mb-3">
+            <label class="form-label">Nombre de la Build</label>
+            <input type="text"
+                   name="name"
+                   class="form-control"
+                   th:value="${build.name}"
+                   required>
+        </div>
+
+        <!-- WARFRAME -->
+        <div class="mb-3">
+            <label class="form-label">Selecciona Warframe</label>
+            <select name="warframeId" class="form-select" required>
+                <option value="">-- Selecciona un Warframe --</option>
+                <option th:each="warframe : ${warframes}"
+                        th:value="${warframe.warframeId}"
+                        th:selected="${warframe.warframeId == build.warframe.warframeId}"
+                        th:text="${warframe.name}">
+                </option>
+            </select>
+        </div>
+
+        <!-- MODS -->
+        <div class="mb-3">
+            <label class="form-label">Selecciona Mods</label>
+
+            <div class="form-check"
+                 th:each="modification : ${mods}">
+                <input class="form-check-input"
+                       type="checkbox"
+                       name="modIds"
+                       th:value="${modification.modId}"
+                       th:checked="${build.mods.contains(modification)}">
+                <label class="form-check-label"
+                       th:text="${modification.name}">
+                </label>
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <button type="submit" class="btn btn-warning">
+                Actualizar Build
+            </button>
+            <a th:href="@{/builds}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+
 </div>
 </body>
 </html>

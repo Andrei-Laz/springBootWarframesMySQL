@@ -39,6 +39,8 @@ class BuildController(
         model.addAttribute("form", BuildForm())
         model.addAttribute("warframes", buildService.listarWarframes())
         model.addAttribute("mods", buildService.listarMods())
+        model.addAttribute("edit", false)
+
         return "formularioBuild"
     }
 
@@ -52,4 +54,35 @@ class BuildController(
         )
         return "redirect:/builds"
     }
+
+    @GetMapping("/editar/{id}")
+    fun editarBuild(@PathVariable id: Int, model: Model): String {
+        val build = buildService.obtenerBuild(id)
+
+        model.addAttribute("build", build)
+        model.addAttribute("warframes", buildService.listarWarframes())
+        model.addAttribute("mods", buildService.listarMods())
+        model.addAttribute("edit", true)
+
+        return "formularioBuild"
+    }
+
+    @PostMapping("/actualizar")
+    fun actualizarBuild(
+        @RequestParam buildId: Int,
+        @RequestParam name: String,
+        @RequestParam warframeId: Int,
+        @RequestParam modIds: List<Int>
+    ): String {
+        buildService.actualizarBuild(buildId, name, warframeId, modIds)
+        return "redirect:/builds"
+    }
+
+
+    @GetMapping("/borrar/{id}")
+    fun borrarBuild(@PathVariable id: Int): String {
+        buildService.borrarBuild(id)
+        return "redirect:/builds"
+    }
+
 }

@@ -35,6 +35,18 @@
                    class="btn btn-primary btn-sm">
                     Detalles
                 </a>
+
+                <a th:href="@{/builds/editar/{id}(id=${build.buildId})}"
+                   class="btn btn-warning btn-sm">
+                    Editar
+                </a>
+
+                <a th:href="@{/builds/borrar/{id}(id=${build.buildId})}"
+                   class="btn btn-danger btn-sm"
+                   onclick="return confirm('¿Seguro que quieres borrar esta build?')">
+                    Eliminar
+                </a>
+
             </td>
         </tr>
         </tbody>
