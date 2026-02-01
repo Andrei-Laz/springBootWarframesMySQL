@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalle de Build</title>
+    <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}">
+</head>
+<body>
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-body">
+
+            <h1 class="card-title text-warning mb-4"
+                th:text="${build.name}">
+                Build Detalle
+            </h1>
+
+            <!-- WARFRAME -->
+            <h3 class="text-info">Warframe</h3>
+            <p class="fs-5">
+                <strong th:text="${build.warframe.name}">Excalibur</strong>
+            </p>
+
+            <ul class="list-unstyled">
+                <li><strong>Salud:</strong> <span th:text="${build.warframe.health}"></span></li>
+                <li><strong>Armadura:</strong> <span th:text="${build.warframe.armor}"></span></li>
+                <li><strong>Energía:</strong> <span th:text="${build.warframe.energy}"></span></li>
+                <li><strong>Velocidad:</strong> <span th:text="${build.warframe.sprintSpeed}"></span></li>
+            </ul>
+
+            <hr>
+
+            <!-- MODS -->
+            <h3 class="text-success">Mods</h3>
+
+            <p th:if="${build.mods.size() == 0}">
+                Esta build no tiene mods asignados.
+            </p>
+
+            <table class="table table-sm" th:if="${build.mods.size() > 0}">
+                <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Rareza</th>
+                    <th>Costo</th>
+                    <th>Polaridad</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="modification : ${build.mods}">
+                    <td th:text="${modification.name}"></td>
+                    <td th:text="${modification.rarity}"></td>
+                    <td th:text="${modification.cost}"></td>
+                    <td th:text="${modification.polarity}"></td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+    <div class="mt-3">
+        <a th:href="@{/builds}" class="btn btn-secondary">
+            Volver a Builds
+        </a>
+    </div>
+</div>
+</body>
+</html>

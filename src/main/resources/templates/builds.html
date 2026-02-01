@@ -8,34 +8,40 @@
 <body>
 <div class="container mt-5">
     <h1>Builds</h1>
-    <h5 th:if="${builds.size() > 0}">Aquí tienes una tabla con todas las builds y las acciones que puedes hacer con ellas</h5>
-    <p th:unless="${builds.size() > 0}">No hay builds registradas en el sistema</p>
-    <table class="table table-striped">
+
+    <h5 th:if="${builds.size() > 0}">
+        Aquí tienes todas las builds registradas
+    </h5>
+    <p th:unless="${builds.size() > 0}">
+        No hay builds registradas en el sistema
+    </p>
+
+    <table class="table table-striped" th:if="${builds.size() > 0}">
         <thead>
         <tr>
-            <th>ID Warframe</th>
-            <th>ID Mod</th>
-            <th>Nombre Warframe</th>
-            <th>Nombre Mod</th>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Warframe</th>
             <th>Acciones</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="build : ${builds}">
-            <td th:text="${build.id.idWarframe}">1</td>
-            <td th:text="${build.id.idMod}">2</td>
-            <td th:text="${build.warframe?.name ?: 'N/A'}">Excalibur</td>
-            <td th:text="${build.modification?.name ?: 'N/A'}">Vitality</td>
+            <td th:text="${build.buildId}"></td>
+            <td th:text="${build.name}"></td>
+            <td th:text="${build.warframe.name}"></td>
             <td>
-                <a th:href="@{/builds/borrar/{warframeId}/{modId}(warframeId=${build.id.idWarframe}, modId=${build.id.idMod})}"
-                   class="btn btn-danger btn-sm"
-                   onclick="return confirm('¿Estás seguro de borrar esta build?')">Borrar</a>
+                <a th:href="@{/builds/{id}(id=${build.buildId})}"
+                   class="btn btn-primary btn-sm">
+                    Detalles
+                </a>
             </td>
         </tr>
         </tbody>
     </table>
+
     <div class="mt-3">
-        <a th:href="@{/builds/nueva}" class="btn btn-success">Crear Nueva Build</a>
+        <a th:href="@{/builds/add}" class="btn btn-success">Crear Nueva Build</a>
         <a th:href="@{/}" class="btn btn-secondary ms-2">Volver al Inicio</a>
     </div>
 </div>

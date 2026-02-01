@@ -1,56 +1,55 @@
 package com.example.springBootWarframesMySQL.controller
 
-import com.example.springBootWarframesMySQL.model.Build
 import com.example.springBootWarframesMySQL.service.BuildService
-import com.example.springBootWarframesMySQL.service.WarframeService
-import com.example.springBootWarframesMySQL.service.ModificationService
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.*
 
+class BuildForm(
+    var name: String = "",
+    var warframeId: Int = 0,
+    var modIds: List<Int> = emptyList()
+)
+
+
 @Controller
+@RequestMapping("/builds")
 class BuildController(
-    private val buildService: BuildService,
-    private val warframeService: WarframeService,
-    private val modService: ModificationService
+    private val buildService: BuildService
 ) {
 
-    @GetMapping("/builds")
-    fun listar(model: Model): String {
-        model.addAttribute("builds", buildService.getAllBuilds())
+    // Lista de builds
+    @GetMapping
+    fun listarBuilds(model: Model): String {
+        model.addAttribute("builds", buildService.listarBuilds())
         return "builds"
     }
 
-    @GetMapping("/builds/warframe/{warframeId}")
-    fun listarPorWarframe(@PathVariable warframeId: Int, model: Model): String {
-        val builds = buildService.getBuildByWarframeId(warframeId)
-        val warframe = warframeService.getById(warframeId)
-        model.addAttribute("builds", builds)
-        model.addAttribute("warframe", warframe)
-        return "buildsPorWarframe"
+    // Detalle de una build
+    @GetMapping("/{id}")
+    fun detalleBuild(@PathVariable id: Int, model: Model): String {
+        val build = buildService.obtenerBuild(id)
+        model.addAttribute("build", build)
+        return "detalleBuild"
     }
 
-    @GetMapping("/builds/nueva")
-    fun nuevaBuild(model: Model): String {
-        model.addAttribute("warframes", warframeService.getWarframes())
-        model.addAttribute("mods", modService.getMods())
-        model.addAttribute("build", Build())
-        model.addAttribute("titulo", "Nueva Build")
+    // Formulario (GET)
+    @GetMapping("/add")
+    fun mostrarFormulario(model: Model): String {
+        model.addAttribute("form", BuildForm())
+        model.addAttribute("warframes", buildService.listarWarframes())
+        model.addAttribute("mods", buildService.listarMods())
         return "formularioBuild"
     }
 
-    @PostMapping("/builds/guardar")
-    fun guardarBuild(
-        @RequestParam("warframeId") warframeId: Int,
-        @RequestParam("modId") modId: Int
-    ): String {
-        buildService.saveBuild(warframeId, modId)
-        return "redirect:/builds"
-    }
-
-    @GetMapping("/builds/borrar/{warframeId}/{modId}")
-    fun borrarBuild(@PathVariable warframeId: Int, @PathVariable modId: Int): String {
-        buildService.deleteBuild(warframeId, modId)
+    // Procesar formulario (POST)
+    @PostMapping("/guardar")
+    fun guardarBuild(@ModelAttribute("form") form: BuildForm): String {
+        buildService.guardarBuild(
+            form.name,
+            form.warframeId,
+            form.modIds
+        )
         return "redirect:/builds"
     }
 }

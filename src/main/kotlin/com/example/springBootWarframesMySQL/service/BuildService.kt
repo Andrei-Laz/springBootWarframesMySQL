@@ -1,6 +1,8 @@
 package com.example.springBootWarframesMySQL.service
 
 import com.example.springBootWarframesMySQL.model.Build
+import com.example.springBootWarframesMySQL.model.Warframe
+import com.example.springBootWarframesMySQL.model.Modification
 import com.example.springBootWarframesMySQL.repository.BuildRepository
 import com.example.springBootWarframesMySQL.repository.WarframeRepository
 import com.example.springBootWarframesMySQL.repository.ModificationRepository
@@ -10,41 +12,37 @@ import org.springframework.stereotype.Service
 class BuildService(
     private val buildRepository: BuildRepository,
     private val warframeRepository: WarframeRepository,
-    private val modRepository: ModificationRepository
+    private val modificationRepository: ModificationRepository
 ) {
-    fun getAllBuilds(): List<Build> = buildRepository.findAll()
 
-    fun getBuildByWarframeId(warframeId: Int): List<Build> = buildRepository.findByWarframeId(warframeId)
+    fun listarBuilds(): List<Build> =
+        buildRepository.findAll()
 
-    fun getBuildByModId(modId: Int): List<Build> = buildRepository.findByModId(modId)
+    fun obtenerBuild(id: Int): Build =
+        buildRepository.findById(id).orElseThrow()
 
-    fun getBuild(warframeId: Int, modId: Int): Build? = buildRepository.findById_IdWarframeAndId_IdMod(warframeId, modId)
+    // Para los desplegables
+    fun listarWarframes(): List<Warframe> =
+        warframeRepository.findAll()
 
-    fun saveBuild(warframeId: Int, modId: Int): Build? {
-        val warframe = warframeRepository.findById(warframeId).orElse(null)
-        val mod = modRepository.findById(modId).orElse(null)
+    fun listarMods(): List<Modification> =
+        modificationRepository.findAll()
 
-        return if (warframe != null && mod != null) {
-            val build = Build(
-                id = com.example.springBootWarframesMySQL.model.BuildId(idWarframe = warframeId, idMod = modId),
-                warframe = warframe,
-                modification = mod
-            )
-            buildRepository.save(build)
-        } else {
-            null // No se puede crear la build si no existen warframe o mod
-        }
-    }
+    fun guardarBuild(
+        name: String,
+        warframeId: Int,
+        modIds: List<Int>
+    ) {
+        val warframeRef = warframeRepository.findById(warframeId).orElseThrow()
 
-    fun deleteBuild(warframeId: Int, modId: Int) {
-        buildRepository.deleteById_IdWarframeAndId_IdMod(warframeId, modId)
-    }
+        val mods = modificationRepository.findAllById(modIds).toMutableSet()
 
-    fun deleteBuildsByWarframeId(warframeId: Int) {
-        buildRepository.deleteByWarframeId(warframeId)
-    }
+        val nuevaBuild = Build(
+            name = name,
+            warframe = warframeRef,
+            mods = mods
+        )
 
-    fun deleteBuildsByModId(modId: Int) {
-        buildRepository.deleteByModId(modId)
+        buildRepository.save(nuevaBuild)
     }
 }
