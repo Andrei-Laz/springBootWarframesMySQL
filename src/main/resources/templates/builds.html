@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Builds</title>
+    <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}">
+</head>
+<body>
+<div class="container mt-5">
+    <h1>Builds</h1>
+    <h5 th:if="${builds.size() > 0}">Aquí tienes una tabla con todas las builds y las acciones que puedes hacer con ellas</h5>
+    <p th:unless="${builds.size() > 0}">No hay builds registradas en el sistema</p>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID Warframe</th>
+            <th>ID Mod</th>
+            <th>Nombre Warframe</th>
+            <th>Nombre Mod</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="build : ${builds}">
+            <td th:text="${build.id.idWarframe}">1</td>
+            <td th:text="${build.id.idMod}">2</td>
+            <td th:text="${build.warframe?.name ?: 'N/A'}">Excalibur</td>
+            <td th:text="${build.modification?.name ?: 'N/A'}">Vitality</td>
+            <td>
+                <a th:href="@{/builds/borrar/{warframeId}/{modId}(warframeId=${build.id.idWarframe}, modId=${build.id.idMod})}"
+                   class="btn btn-danger btn-sm"
+                   onclick="return confirm('¿Estás seguro de borrar esta build?')">Borrar</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="mt-3">
+        <a th:href="@{/builds/nueva}" class="btn btn-success">Crear Nueva Build</a>
+        <a th:href="@{/}" class="btn btn-secondary ms-2">Volver al Inicio</a>
+    </div>
+</div>
+</body>
+</html>
