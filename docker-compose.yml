@@ -13,8 +13,8 @@ services:
       MYSQL_PASSWORD: wasd
 
 
-#export databases
+#export database
 #docker exec -i mysql-warframe-server mysqldump --no-tablespaces -u root -p SpringBootWarframe > SpringBootWarframe.sql
 
-#import databases
+#import database
 #docker exec -i mysql-warframe-server mysql -u root -p SpringBootWarframe < SpringBootWarframe.sql
